@@ -1,4 +1,5 @@
 const express = require('express')
+const engine = require('./services/stories/stories');
 
 require ('./db/mongoose')
 
@@ -19,5 +20,7 @@ const app = express()
 
 app.use(allowCrossDomain)
 app.use(express.json())
+
+engine();
 
 module.exports = app
