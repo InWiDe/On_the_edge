@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const storySchema = new mongoose.Schema([{
+const storySchema = new mongoose.Schema({
     storyPath:{
         type:String
     },
@@ -16,7 +16,7 @@ const storySchema = new mongoose.Schema([{
             nextDialogId:Number
         }]
     }]
-}])
+})
 
 const Story = new mongoose.model('Story', storySchema)
 module.exports = Story;
