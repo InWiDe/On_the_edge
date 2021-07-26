@@ -31,4 +31,25 @@ router.get('/stories/:storyId',async(req,res) => {
         res.status(400).send('Problem occured while getting story')
     }
 })
+
+ /**
+ * Endpoint, that retrieves specific story from db 
+ * 
+ * @param {Integer} storyId id of story
+ * @returns 200 response with specific story from db
+ * @error returns 400 response
+ */
+router.post('/stories',async(req,res) => {
+    const newStory = new Story({
+        ...req.body,
+    })
+    try{
+        await newStory.save()
+        res.status(200).send("Story was successfuly created")
+    }catch(e){
+        res.status(400).send(e)
+    }
+})
+
+
 module.exports = router
