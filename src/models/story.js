@@ -10,10 +10,8 @@ const storySchema = new mongoose.Schema({
         },
         senderTextArr:[],
         questionArr:[{
-            questText:{
-                type:String
-            },
-            nextDialogId:Number
+            questText: String,
+            nextDialogId: Number
         }]
     }]
 })
