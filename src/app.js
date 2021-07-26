@@ -18,7 +18,12 @@ const storyRouter = require('./services/stories/stories.js')
 app.use(storyRouter)
 
 app.use(allowCrossDomain)
-app.use(express.json())
+
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
+
 
 engine();
 
