@@ -1,12 +1,10 @@
 const express = require('express')
+const engine = require('./services/stories/classes');
 
 require ('./db/mongoose')
 
-// //User Router
-// const userProjectRouter = require('./services/user/user-project')
-
-// //Router for login/signup/
-// app.use(authRouter)
+//User Router
+const storyRouter = require('./services/stories/stories.js')
 
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
@@ -17,7 +15,12 @@ var allowCrossDomain = function(req, res, next) {
 
 const app = express()
 
+//Router for stories
+app.use(storyRouter)
+
 app.use(allowCrossDomain)
 app.use(express.json())
+
+engine();
 
 module.exports = app
