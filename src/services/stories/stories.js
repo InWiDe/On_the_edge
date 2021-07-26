@@ -40,12 +40,13 @@ router.get('/stories/:storyId',async(req,res) => {
  * @error returns 400 response
  */
 router.post('/stories',async(req,res) => {
+    console.log(req);
     const newStory = new Story({
         ...req.body,
     })
     try{
-        await newStory.save()
-        res.status(200).send("Story was successfuly created")
+        // await newStory.save()
+        res.status(200).send(newStory)
     }catch(e){
         res.status(400).send(e)
     }
