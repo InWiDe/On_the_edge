@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "env-cmd -f ./config/.env nodemon src/app.js"
+    "start": "env-cmd -f ./config/.env nodemon src/index.js"
   },
   "repository": {
     "type": "git",
