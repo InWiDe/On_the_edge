@@ -33,24 +33,60 @@ router.get('/stories/:storyId',async(req,res) => {
 })
 
  /**
- * Endpoint, that retrieves specific story from db 
+ * Endpoint, that adds new story to the db
  * 
- * @param {Integer} storyId id of story
- * @returns 200 response with specific story from db
+ * @returns 200 response if story has been added into the db
  * @error returns 400 response
  */
 router.post('/stories',async(req,res) => {
-    console.log(req);
     const newStory = new Story({
         ...req.body,
     })
     try{
-        // await newStory.save()
-        res.status(200).send(newStory)
+        if(req.body.storyLine.length !== 0)
+        {
+            await newStory.save()
+            res.status(200).send(newStory)
+        }
     }catch(e){
         res.status(400).send(e)
     }
 })
 
+
+ /**
+ * Endpoint, that updates story regarding to the JSON. Needs to have json check implemented in the future
+ * 
+ * @returns 200 response if story was updated. Returns updatedStory
+ * @error returns 500 response
+ */
+router.patch('/stories/:storyId',async(req,res) => {
+try{
+        const updatedStory = await Story.findByIdAndUpdate(req.params.storyId, req.body);
+        updatedStory.save();
+        res.send(updatedStory).status(200)
+    }
+     catch(e)
+    {
+        return res.status(500).send()
+    }
+})
+
+ /**
+ * Endpoint, Deletes story from the db
+ * 
+ * @returns 200 response if story was deleted
+ * @error returns 400 response
+ */
+router.delete('/stories/:storyId',async(req,res) => {
+    try {
+        await Story.findOneAndDelete({_id:req.params.storyId})
+        res.status(200).send('Story was deleted')
+    }
+     catch(e)
+    {
+        res.status(400).send('Deletion was not successful')
+    }
+})
 
 module.exports = router

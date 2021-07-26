@@ -2,7 +2,7 @@
   "name": "on_the_edge",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start": "env-cmd -f ./config/.env nodemon src/index.js"
   },
