@@ -12,6 +12,8 @@ var allowCrossDomain = function(req, res, next) {
 }
 
 const app = express()
+app.use(cors());
+app.use(allowCrossDomain)
 app.use(bodyParser.urlencoded({
     extended: true
   }));
@@ -20,8 +22,6 @@ app.use(bodyParser.json());
 const storyRouter = require('./services/stories/stories.js')
 //Router for stories
 app.use(storyRouter)
-app.use(allowCrossDomain)
-app.use(cors());
 
 
 engine();
