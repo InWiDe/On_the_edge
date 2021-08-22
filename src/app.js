@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 const storyRouter = require('./services/stories/stories.js')
 //Router for stories
 app.use(storyRouter)
-
+app.use(cors());
 app.use(allowCrossDomain)
 
 
