@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const storySchema = new mongoose.Schema({
+const pathSchema = new mongoose.Schema({
     storyPath:{
         type:String
     },
@@ -18,5 +18,5 @@ const storySchema = new mongoose.Schema({
     }]
 })
 
-const Story = new mongoose.model('Story', storySchema)
-module.exports = Story;
+const Path = new mongoose.model('Path', pathSchema)
+module.exports = Path;

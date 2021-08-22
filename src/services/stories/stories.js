@@ -1,52 +1,52 @@
 const express = require('express')
 const router = new express.Router()
-const Story = require('../../models/story.js')
+const Path = require('../../models/path.js')
 
  /**
- * Endpoint, that retrieves all stories from db
- * @returns 200 response with all stories from db
+ * Endpoint, that retrieves all paths from db
+ * @returns 200 response with all paths from db
  * @error returns 400 response
  */
-router.get('/stories',async(req,res) => {
+router.get('/paths',async(req,res) => {
     try{
-        const stories = await Story.find();
-        res.status(200).send(stories)
+        const paths = await Path.find();
+        res.status(200).send(paths)
     }catch{
-        res.status(400).send('Problem occured while getting stories')
+        res.status(400).send('Problem occured while getting paths')
     }
 })
 
  /**
- * Endpoint, that retrieves specific story from db 
+ * Endpoint, that retrieves specific path from db 
  * 
- * @param {Integer} storyId id of story
- * @returns 200 response with specific story from db
+ * @param {Integer} pathid id of path
+ * @returns 200 response with specific path from db
  * @error returns 400 response
  */
-router.get('/stories/:storyId',async(req,res) => {
+router.get('/paths/:pathId',async(req,res) => {
     try{
-        const story = await Story.findOne({_id:req.params.id});
-        res.status(200).send(story);
+        const path = await Path.findOne({_id:req.params.id});
+        res.status(200).send(path);
     }catch{
         res.status(400).send('Problem occured while getting story')
     }
 })
 
  /**
- * Endpoint, that adds new story to the db
+ * Endpoint, that adds new path to the db
  * 
- * @returns 200 response if story has been added into the db
+ * @returns 200 response if path has been added into the db
  * @error returns 400 response
  */
-router.post('/stories',async(req,res) => {
-    const newStory = new Story({
+router.post('/paths',async(req,res) => {
+    const newPath = new Path({
         ...req.body,
     })
     try{
         if(req.body.storyLine.length !== 0)
         {
-            await newStory.save()
-            res.status(200).send(newStory)
+            await newPath.save()
+            res.status(200).send(newPath)
         }
     }catch(e){
         res.status(400).send(e)
@@ -55,16 +55,16 @@ router.post('/stories',async(req,res) => {
 
 
  /**
- * Endpoint, that updates story regarding to the JSON. Needs to have json check implemented in the future
+ * Endpoint, that updates path regarding to the JSON. Needs to have json check implemented in the future
  * 
- * @returns 200 response if story was updated. Returns updatedStory
+ * @returns 200 response if path was updated. Returns updated Path
  * @error returns 500 response
  */
-router.patch('/stories/:storyId',async(req,res) => {
+router.patch('/path/:pathId',async(req,res) => {
 try{
-        const updatedStory = await Story.findByIdAndUpdate(req.params.storyId, req.body);
-        updatedStory.save();
-        res.send(updatedStory).status(200)
+        const updatedPath = await Path.findByIdAndUpdate(req.params.pathId, req.body);
+        updatedPath.save();
+        res.send(updatedPath).status(200)
     }
      catch(e)
     {
@@ -73,15 +73,15 @@ try{
 })
 
  /**
- * Endpoint, Deletes story from the db
+ * Endpoint, Deletes path from the db
  * 
- * @returns 200 response if story was deleted
+ * @returns 200 response if path was deleted
  * @error returns 400 response
  */
-router.delete('/stories/:storyId',async(req,res) => {
+router.delete('/paths/:pathId',async(req,res) => {
     try {
-        await Story.findOneAndDelete({_id:req.params.storyId})
-        res.status(200).send('Story was deleted')
+        await Path.findOneAndDelete({_id:req.params.pathId})
+        res.status(200).send('Path was deleted')
     }
      catch(e)
     {
