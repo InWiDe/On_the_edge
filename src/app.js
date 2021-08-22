@@ -1,6 +1,7 @@
 const express = require('express')
 const engine = require('./services/stories/classes');
 var bodyParser = require('body-parser');
+var cors = require('cors')
 require ('./db/mongoose')
 
 var allowCrossDomain = function(req, res, next) {
